@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "cunft-7c062": {
+      "hosting": {
+        "cunft": [
+          "cunft-7c062"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "cunft-7c062"
+  }
+}

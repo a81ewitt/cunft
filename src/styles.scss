@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+$primary: #1161E4;
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+ 
+@import '~mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+body{
+    background: linear-gradient(110deg, #f5afbb11 60%, #1162e409 40%);
+}

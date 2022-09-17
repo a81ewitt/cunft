@@ -1,0 +1,154 @@
+<div class="container">
+    <div class="fs-1 m-5">Create your NFT<div class="fs-6">Choose a file, add a name and CREATE</div>
+    </div>
+
+    <hr />
+
+    <!-- Steps 1--2 -->
+    <div class="d-flex flex-row justify-content-center">
+        <div class="d-flex align-items-center flex-column text-primary">
+            <i class="bi bi-1-circle fa-2x"></i>
+            <div>
+                Create
+            </div>
+        </div>
+        <div class="d-flex align-items-center flex-column mt-2 text-muted" style="width: 150px;">
+            <hr style="width: 100%;">
+        </div>
+        <div class="d-flex align-items-center flex-column text-muted">
+            <i class="bi bi-2-circle fa-2x"></i>
+            <div>
+                Payment
+            </div>
+        </div>
+    </div>
+    <!-- main contetnt -->
+    <div class="row my-5">
+        <!-- Left side -->
+        <div class="col-md-6 mb-3">
+
+            <!-- form -->
+            <form [formGroup]="createForm" class="border p-3 bg-white card">
+
+                <!-- file input-->
+                <div class="mb-3">
+                    <label for="file" class="form-label">File</label>
+                    <input type="file" class="form-control form-control-lg" placeholder="Browse" name="file"
+                        (change)="onFileChange($event)">
+                </div>
+
+                <!-- file input-->
+                <div *ngIf="fileField.invalid && (fileField.dirty || fileField.touched)" class="alert alert-danger">
+                    <div *ngIf="fileField.errors?.['required']">
+                        Choose file or image for NFT
+                    </div>
+                </div>
+
+                <!-- address input-->
+                <div class="mb-3">
+                    <label for="address" class="form-label">Your Cardano wallet address</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter address" name="address"
+                        formControlName="addressField">
+                </div>
+
+                <!--address validation-->
+                <div *ngIf="addressField.invalid && (addressField.dirty || addressField.touched)"
+                    class="alert alert-danger">
+                    <div *ngIf="addressField.errors?.['required']">
+                        Enter the Cardano address that will recieve the NFT
+                    </div>
+                    <div *ngIf="addressField.errors?.['pattern']">
+                        Enter valid Cardano address
+                    </div>
+                </div>
+
+                <!-- name input-->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Your NFT name</label>
+                    <input type="text" class="form-control form-control-lg" placeholder="Enter NFT name" name="name"
+                        formControlName="nameField">
+                </div>
+
+                <!--name validation-->
+                <div *ngIf="nameField.invalid && (nameField.dirty || nameField.touched)" class="alert alert-danger">
+                    <div *ngIf="nameField.errors?.['required']">
+                        Enter a name to call your NFT
+                    </div>
+                    <div *ngIf="nameField.errors?.['maxUTFBytesValidator']">
+                        Name must be shorter
+                    </div>
+                </div>
+
+                <!-- attributes input-->
+                <div formArrayName="attributes">
+                    <div class="row align-items-end" *ngFor="let attribute of attributes.controls; let i=index"
+                        [formGroupName]="i">
+
+                        <!--attribute name field-->
+                        <div class="col mb-3">
+                            <label for="name-{{ i }}">Name</label>
+                            <input class="form-control form-control-lg" id="name-{{ i }}" type="text"
+                                formControlName="name">
+                        </div>
+
+                        <!--attribute value field-->
+                        <div class="col mb-3">
+                            <label for="value-{{ i }}">Value</label>
+                            <input class="form-control form-control-lg" id="value-{{ i }}" type="text"
+                                formControlName="value">
+                        </div>
+
+                        <!--attribute remove-->
+                        <div class="col mb-3">
+                            <a class="btn btn-lg btn-danger" (click)="removeAttribute(i)">
+                                <i class="fa-regular fa-rectangle-xmark fa-2xl"></i></a>
+                        </div>
+
+                        <!--attribute validation-->
+                        <div *ngIf="attributes.at(i).invalid && (attributes.at(i).dirty || attributes.at(i).touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="attributes.at(i).get('name')?.errors?.['required']">
+                                Name must be filled
+                            </div>
+                            <div *ngIf="attributes.at(i).get('name')?.errors?.['maxUTFBytesValidator']">
+                                Name must be shorter
+                            </div>
+                            <div *ngIf="attributes.at(i).get('value')?.errors?.['required']">
+                                Value must be filled
+                            </div>
+                            <div *ngIf="attributes.at(i).get('value')?.errors?.['maxUTFBytesValidator']">
+                                Value must be shorter
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--attribute add-->
+                    <button class="btn btn-primary mb-3 " (click)="addAttribute()">+ Add another attribute</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Right side -->
+        <div class="col-md-6">
+
+            <!-- Nft Preview -->
+            <div class="card border p-3 mb-3">
+                <div class="form-label">NFT preview</div>
+                <hr>
+                <div *ngIf="imageURL && imageURL != ''">
+                    <img class="card-img-top img-fluid" [src]="imageURL" alt="your NFT image" />
+                </div>
+                <div class="card-body">
+                    <p class="card-title fs-2" *ngIf="createForm.get('nameField')?.valid">Name {{createForm.get('nameField')?.value}}</p>
+                    <div *ngFor="let attribute of attributes.controls; let i=index">
+                        <p class="card-text fs-3 m-3">{{attribute.get('name')?.value}} {{attribute.get('value')?.value}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--form submit-->
+            <button [ngClass]="createForm.valid? '': 'disabled'" class="btn btn-primary mt-3"
+                (click)="submit()">Create</button>
+        </div>
+    </div>
+</div>
