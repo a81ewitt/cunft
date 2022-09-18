@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  firebase: {
+    projectId: 'cunft-7c062',
+    appId: '1:881093565350:web:a1c4d92c7d60af6bd7cd67',
+    storageBucket: 'cunft-7c062.appspot.com',
+    apiKey: 'AIzaSyAu2XBahAqtoi9P31_Q4fKzqjElTPYoZZI',
+    authDomain: 'cunft-7c062.firebaseapp.com',
+    messagingSenderId: '881093565350',
+    measurementId: 'G-4FCRSG6Q0D',
+  },
+  production: false,
+  nftguyurl: "http://docker.lan:8080",
+  network: "testnet"
 };
 
 /*
