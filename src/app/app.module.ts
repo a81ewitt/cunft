@@ -70,7 +70,10 @@ import { HomeComponent } from './home/home.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true,
+    }),
     QRCodeModule,
     ClipboardModule,
     AngularFireModule.initializeApp(environment.firebase),
