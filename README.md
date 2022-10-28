@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Firebase Deploy
 
-Run `firebase deploy` to deploy to production. Project is configured to use firebase as hosting and analytics.
+Run `ng build` & `firebase deploy` to deploy to production. Project is configured to use firebase as hosting and analytics.
 
 ## Development server
 
