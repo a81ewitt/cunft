@@ -37,6 +37,21 @@
           }
         }
       }
+    },
+    {
+      "type": "shell",
+      "group":"build",
+      "command": "firebase deploy",
+      "label": "build & firebase deploy",
+      "dependsOn": "npm: build",
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": "build",
+      "problemMatcher": [],
+      "label": "npm: build",
+      "detail": "ng build"
     }
   ]
 }

@@ -6,6 +6,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng build` & `firebase deploy` to deploy to production. Project is configured to use firebase as hosting and analytics.
 
+VSCode task `build & firebase deploy` will also give the same result
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
