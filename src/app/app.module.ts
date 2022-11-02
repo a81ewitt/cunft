@@ -37,6 +37,7 @@ import { AngularFirePerformanceModule } from '@angular/fire/compat/performance';
 import { environment } from '../environments/environment';
 import { ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { HomeComponent } from './home/home.component';
+import { StatusComponent } from './status/status.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { HomeComponent } from './home/home.component';
     ContactComponent,
     AboutComponent,
     TransactionComponent,
-    HomeComponent
+    HomeComponent,
+    StatusComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,42 @@
+<div class="container">
+
+    <div class="m-3">
+        <div class="row justify-content-md-center fs-2 ">Status</div>
+        <div class="row justify-content-md-center fs-1">{{health?.status}}</div>
+        <div *ngIf="health?.status == 'UP'; else notUp" class="row justify-content-md-center fa-solid fa-circle-check display-1 text text-success"></div>
+        <ng-template #notUp>
+            <div class="row justify-content-md-center fa-solid fa-circle-xmark display-1 text text-danger"></div>
+        </ng-template>
+    </div>
+
+    <div class="fw-bold" *ngIf="health; else elseBlock">
+        <div class="row justify-content-md-center m-3 p-3 border fs-6 bg-white rounded">
+            <div class="col-md-6">Cardano Wallet</div>
+            <div class="col-md-4">
+                <div *ngIf="health.components.cardanoWalletAPI.details.ready != 'null'">Sync:
+                    {{health.components.cardanoWalletAPI.details.ready}}</div>
+            </div>
+            <div class="col-md-2" [ngClass]="health.components.diskSpace.status == 'UP' ? 'text-success' : 'text-danger'" >Status: {{health.components.cardanoWalletAPI.status}}</div>
+        </div>
+        <div class="row justify-content-md-center m-3 p-3 border bg-white rounded">
+            <div class="col-md-6">Database</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-2" [ngClass]="health.components.diskSpace.status == 'UP' ? 'text-success' : 'text-danger'" >Status: {{health.components.mongo.status}}</div>
+        </div>
+        <div class="row justify-content-md-center m-3 p-3 border bg-white rounded">
+            <div class="col-md-6">Disk</div>
+            <div class="col-md-4">Space: {{health.components.diskSpace.details.free}}</div>
+            <div class="col-md-2" [ngClass]="health.components.diskSpace.status == 'UP' ? 'text-success' : 'text-danger'" >Status: {{health.components.diskSpace.status}}</div>
+        </div>
+        <div class="row justify-content-md-center m-3 p-3 border bg-white rounded">
+            <div class="col-md-6">Ping</div>
+            <div class="col-md-4"></div>
+            <div class="col-md-2" [ngClass]="health.components.diskSpace.status == 'UP' ? 'text-success' : 'text-danger'" >Status: {{health.components.ping.status}}</div>
+        </div>
+    </div>
+
+    <ng-template #elseBlock>
+        <p>API is offline, :-(</p>
+        <p>Please check our <a href="/contact">contact page</a></p>
+    </ng-template>
+</div>
