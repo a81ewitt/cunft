@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Health } from '../health';
+import { HealthCheckService } from '../health-check.service';
 import { NftCreateService } from '../nft-create.service';
 import { NftLocalService } from '../nft-local.service';
 
@@ -20,15 +22,18 @@ export function maxUTFBytesValidator(): ValidatorFn {
 })
 
 export class CreateComponent implements OnInit {
+  health?: Health;
 
   constructor(private formBuilder: FormBuilder,
     private nftCreateService: NftCreateService,
+    private healthService: HealthCheckService, 
     private router: Router,
     public nftLocalService: NftLocalService) { }
 
   imageURL?: string;
 
   ngOnInit(): void {
+    this.updateHealth();
   }
 
   createForm = this.formBuilder.group({
@@ -92,8 +97,14 @@ export class CreateComponent implements OnInit {
       .subscribe((response) => {
         if (response.paymentState === "UPLOADING") {
           this.router.navigate(['/transaction'], {queryParams: {id: response.id}});
-        } 
+        }
       })
+  }
+
+  updateHealth(){
+    this.healthService.getHealth().subscribe(response => {
+      this.health = response;
+    })
   }
 
   onFileChange(event: any) {

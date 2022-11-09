@@ -38,7 +38,7 @@ export class NftCreateService {
         // TODO: send the error to remote logging infrastructure
         //console.error(error); // log to console instead
   
-        this.toastr.error('Unable to create NFT, error while performing ' + operation + " operation", 'Sorry');
+        this.toastr.error('Unable to create NFT, error while performing ' + operation +' ,Sorry');
   
         // Let the app keep running by returning an empty result.
         return of(result as T);
