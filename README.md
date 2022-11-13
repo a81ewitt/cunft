@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
 
+## Set up
+
+Install angular-cli tools `npm install -g @angular/cli`
+
+Clone this repo.
+
+Run `npm install` from inside the repo root.
+
 ## Firebase Deploy
 
 Run `ng build` & `firebase deploy` to deploy to production. Project is configured to use firebase as hosting and analytics.
