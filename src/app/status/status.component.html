@@ -2,15 +2,13 @@
 
     <div class="m-3">
         <div class="row justify-content-md-center fs-2 ">Status</div>
-        <div class="row justify-content-md-center fs-1">{{health?.status}}</div>
-        <div *ngIf="health?.status == 'UP'; else notUp" class="row justify-content-md-center fa-solid fa-circle-check display-1 text text-success"></div>
-        <ng-template #notUp>
-            <div class="row justify-content-md-center fa-solid fa-circle-xmark display-1 text text-danger"></div>
-        </ng-template>
     </div>
 
-    <div class="fw-bold" *ngIf="health; else elseBlock">
+    <div class="fw-bold" *ngIf="health">
+      <div class="row justify-content-md-center fs-1">{{health.status}}</div>
+      <div class="row justify-content-md-center fa-solid fa-circle-check display-1 text text-success"></div>
         <div class="row justify-content-md-center m-3 p-3 border fs-6 bg-white rounded">
+
             <div class="col-md-6">Cardano Wallet</div>
             <div class="col-md-4">
                 <div *ngIf="health.components.cardanoWalletAPI.details.ready != 'null'">Sync:
@@ -35,10 +33,11 @@
         </div>
     </div>
 
-    <ng-template #elseBlock>
-        <div class="row justify-content-md-center fs-6  ">
-            <div class="col-md-4 m-3 bg-white p-3 shadow-lg rounded border">Sorry, it looks like we are unable to contact the creation server. 
-                If issue persists please <a href="/contact">contact us</a></div>
+    <div class="row justify-content-md-center fs-6 " *ngIf="!health && getHealthCall?.closed">
+        <div class="row justify-content-md-center fa-solid fa-circle-xmark display-1 text text-danger">
         </div>
-    </ng-template>
+        <div class="col-md-4 m-3 bg-white p-3 shadow-lg rounded border">Sorry, it looks like we are unable to contact the server.
+                If issue persists please <a href="/contact">contact us</a>
+        </div>
+    </div>
 </div>

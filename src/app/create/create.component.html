@@ -23,7 +23,7 @@
         </div>
     </div>
     <!-- main contetnt -->
-    <div class="row my-5" *ngIf="health?.status == 'UP';else ifDown">
+    <div class="row my-5" *ngIf="health?.status == 'UP' || !getHealthCall?.closed;else ifDown">
         <!-- Left side -->
         <div class="col-md-6 mb-3">
 
@@ -154,7 +154,7 @@
     <ng-template #ifDown>
         <div class="row justify-content-md-center fa-solid fa-circle-xmark display-1 text text-danger"></div>
         <div class="row justify-content-md-center fs-6 rounded">
-            <div class="col-md-4 m-3 bg-white p-3 shadow-lg rounded border">Sorry, it looks like we are unable to contact the creation server. 
+            <div class="col-md-4 m-3 bg-white p-3 shadow-lg rounded border">Sorry, it looks like we are unable to contact the creation server.
                 If issue persists please <a href="/contact">contact us</a></div>
         </div>
     </ng-template>

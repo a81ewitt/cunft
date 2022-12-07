@@ -6,6 +6,7 @@ import { Health } from '../health';
 import { HealthCheckService } from '../health-check.service';
 import { NftCreateService } from '../nft-create.service';
 import { NftLocalService } from '../nft-local.service';
+import {Subscription} from "rxjs";
 
 /** A field / cardano metadata cannot exceed 64bytes of utf-8 encoding */
 export function maxUTFBytesValidator(): ValidatorFn {
@@ -23,10 +24,11 @@ export function maxUTFBytesValidator(): ValidatorFn {
 
 export class CreateComponent implements OnInit {
   health?: Health;
+  getHealthCall?: Subscription;
 
   constructor(private formBuilder: FormBuilder,
     private nftCreateService: NftCreateService,
-    private healthService: HealthCheckService, 
+    private healthService: HealthCheckService,
     private router: Router,
     public nftLocalService: NftLocalService) { }
 
@@ -102,7 +104,7 @@ export class CreateComponent implements OnInit {
   }
 
   updateHealth(){
-    this.healthService.getHealth().subscribe(response => {
+     this.getHealthCall = this.healthService.getHealth().subscribe(response => {
       this.health = response;
     })
   }
